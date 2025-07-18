@@ -1,6 +1,7 @@
 // const md5 = require("md5");
 // const bcrypt = require("bcrypt");
 // const saltRounds = 10
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -37,7 +38,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/userDB", {useNewUrlParser:true, useUnifiedTopology:true});
+// mongoose.connect("mongodb://localhost:27017/userDB", {useNewUrlParser:true, useUnifiedTopology:true});
+mongoose.connect(process.env.ATLAS, {useNewUrlParser:true, useUnifiedTopology:true});
 // mongoose.set("useCreateIndex", true);
 const userSchema = new mongoose.Schema({email:String, password:String, googleID:String, facebookID:String, secret:String});
 // userSchema.plugin(encrypt, {encryptionKey:process.env.SECRET, encryptedFields:['password']});
